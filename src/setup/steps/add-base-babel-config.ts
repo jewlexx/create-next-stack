@@ -4,6 +4,7 @@ import { Step } from "../step"
 import { CreateNextAppStep } from "./create-next-app"
 
 export const AddBaseBabelConfigStep: Step = {
+  type: "Runnable",
   dependencies: [CreateNextAppStep],
 
   shouldRun: function (this) {

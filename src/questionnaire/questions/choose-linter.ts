@@ -5,11 +5,12 @@ import {
   lintStagedValue,
   prettierValue,
   TechnologiesAnswers,
-} from "../../questionnaire/questions/technologies"
-import { Step } from "../step"
-import { RemoveOfficialCNAContentStep } from "./remove-official-cna-content"
+} from "./technologies"
+import { Step } from "../../setup/step"
+import { RemoveOfficialCNAContentStep } from "../../setup/steps/remove-official-cna-content"
 
 export const ChooseLinterStep: Step = {
+  type: "Question",
   dependencies: [RemoveOfficialCNAContentStep],
 
   shouldRun: function (this, answers) {

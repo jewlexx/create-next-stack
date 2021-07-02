@@ -10,6 +10,7 @@ import { InitializeGitStep } from "./initialize-git"
 import { SetupPrettierStep } from "./setup-prettier"
 
 export const SetupLintStagedStep: Step = {
+  type: "Runnable",
   dependencies: [SetupPrettierStep, InitializeGitStep],
 
   shouldRun: function (this, answers) {

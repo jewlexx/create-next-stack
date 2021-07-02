@@ -3,7 +3,7 @@ import { QuestionnaireAnswers } from "./questionnaire/questionnaire"
 import { promptProjectName } from "./questionnaire/questions/project-name"
 import { Step } from "./setup/step"
 import { AddBaseBabelConfigStep } from "./setup/steps/add-base-babel-config"
-import { ChooseLinterStep } from "./setup/steps/choose-linter"
+import { ChooseLinterStep } from "./questionnaire/questions/choose-linter"
 import { CreateNextAppStep } from "./setup/steps/create-next-app"
 import { FormatProjectStep } from "./setup/steps/format-project"
 import { InitializeGitStep } from "./setup/steps/initialize-git"
@@ -52,21 +52,24 @@ class Boil extends Command {
       projectName: await promptProjectName(),
       technologies: [],
     }
-    const sortedSteps = generateStepsToRun.call(this, steps)
+    const sortedSteps = filterDeadDependencies.call(this, steps)
 
     const stepsToRun: Step[] = []
 
     for (const step of sortedSteps) {
       if (step.shouldRun.call(this, answerSet)) {
         stepsToRun.push(step)
-        answerSet = step.question
-          ? await step.question.call(this, answerSet)
-          : answerSet
+        answerSet =
+          step.type == "Question"
+            ? await step.question.call(this, answerSet)
+            : answerSet
       }
     }
 
-    for (const step of generateStepsToRun.call(this, stepsToRun)) {
-      step.run && (await step.run.call(this, answerSet))
+    for (const step of filterDeadDependencies.call(this, stepsToRun)) {
+      step.type == "Runnable" &&
+        step.run &&
+        (await step.run.call(this, answerSet))
     }
 
     // const answers = await performQuestionnaire.call(this)
@@ -75,7 +78,7 @@ class Boil extends Command {
   }
 }
 
-function generateStepsToRun(this: Command, steps: Step[]) {
+function filterDeadDependencies(this: Command, steps: Step[]) {
   const stepsToRun: Step[] = []
 
   a: while (true) {

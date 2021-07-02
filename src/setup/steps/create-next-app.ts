@@ -4,6 +4,7 @@ import { Step } from "../step"
 import { UpdateYarnStep } from "./update-yarn"
 
 export const CreateNextAppStep: Step = {
+  type: "Runnable",
   dependencies: [UpdateYarnStep],
 
   shouldRun: function (this) {

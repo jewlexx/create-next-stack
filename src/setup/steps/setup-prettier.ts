@@ -5,9 +5,10 @@ import { isUnknownObject } from "../../helpers/is-unknown-object"
 import { writeJsonFile } from "../../helpers/write-json-file"
 import { prettierValue } from "../../questionnaire/questions/technologies"
 import { Step } from "../step"
-import { ChooseLinterStep } from "./choose-linter"
+import { ChooseLinterStep } from "../../questionnaire/questions/choose-linter"
 
 export const SetupPrettierStep: Step = {
+  type: "Runnable",
   dependencies: [ChooseLinterStep],
 
   shouldRun: function (this, answers) {

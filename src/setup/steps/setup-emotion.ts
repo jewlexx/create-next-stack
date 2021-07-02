@@ -8,6 +8,7 @@ import { Step } from "../step"
 import { AddBaseBabelConfigStep } from "./add-base-babel-config"
 
 export const SetupEmotionStep: Step = {
+  type: "Runnable",
   dependencies: [AddBaseBabelConfigStep],
 
   shouldRun: function (this, answers) {

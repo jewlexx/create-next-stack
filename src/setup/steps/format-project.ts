@@ -9,6 +9,7 @@ import { SetupPrettierStep } from "./setup-prettier"
 import { UpdateYarnStep } from "./update-yarn"
 
 export const FormatProjectStep: Step = {
+  type: "Runnable",
   dependencies: [
     AddBaseBabelConfigStep,
     SetupPrettierStep,
