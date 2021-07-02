@@ -9,12 +9,12 @@ export type TechValue =
   | typeof emotionValue
   | typeof lintStagedValue
 
-export async function promptTechnologies() {
-  const answerName = "technologies"
-  type TechnologiesAnswers = {
-    [answerName]: TechValue[]
-  }
+export const answerName = "technologies"
+export type TechnologiesAnswers = {
+  [answerName]: TechValue[]
+}
 
+export async function promptTechnologies() {
   const { technologies } = await inquirer.prompt<TechnologiesAnswers>({
     name: answerName,
     type: "checkbox",

@@ -4,5 +4,9 @@ import { QuestionnaireAnswers } from "../questionnaire/questionnaire"
 export type Step = {
   dependencies: Step[]
   shouldRun: (this: Command, answers: QuestionnaireAnswers) => boolean
-  run: (this: Command, answers: QuestionnaireAnswers) => Promise<void>
+  run?: (this: Command, answers: QuestionnaireAnswers) => Promise<void>
+  question?: (
+    this: Command,
+    answers: QuestionnaireAnswers
+  ) => Promise<QuestionnaireAnswers>
 }

@@ -5,15 +5,11 @@ import { AddBaseBabelConfigStep } from "./add-base-babel-config"
 import { CreateNextAppStep } from "./create-next-app"
 import { InitializeGitStep } from "./initialize-git"
 import { RemoveOfficialCNAContentStep } from "./remove-official-cna-content"
-import { SetupEmotionStep } from "./setup-emotion"
-import { SetupLintStagedStep } from "./setup-lint-staged"
 import { SetupPrettierStep } from "./setup-prettier"
 import { UpdateYarnStep } from "./update-yarn"
 
 export const FormatProjectStep: Step = {
   dependencies: [
-    SetupLintStagedStep,
-    SetupEmotionStep,
     AddBaseBabelConfigStep,
     SetupPrettierStep,
     RemoveOfficialCNAContentStep,
